@@ -20,6 +20,7 @@ public class SampleJob {
 	JobBuilderFactory jobBuilderFactory;
 	@Autowired
 	StepBuilderFactory stepBuilderFactory;
+	
     @Bean
 	public Job firstJob() {
     	
