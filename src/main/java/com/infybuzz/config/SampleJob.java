@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.infybuzz.service.SecondTasklet;
+
 
 @Configuration
 public class SampleJob {
@@ -20,6 +22,9 @@ public class SampleJob {
 	JobBuilderFactory jobBuilderFactory;
 	@Autowired
 	StepBuilderFactory stepBuilderFactory;
+	
+	@Autowired
+	SecondTasklet secondTasklet;
 	
     @Bean
 	public Job firstJob() {
@@ -61,27 +66,27 @@ public class SampleJob {
 public Step secondStep() {
 	   
 	   return stepBuilderFactory.get("Second Step")
-			   .tasklet(secondTask())
+			   .tasklet(secondTasklet)
 			   .build();
 	   
 	 
    }
 
-   public Tasklet secondTask() {
-	   
-	   
-		 return  new Tasklet() {
-	
-	@Override
-	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
-
-
-		
-		 System.out.println("This is the second tasklet step");
-		return RepeatStatus.FINISHED; 
-	}
-};
-}
+//   public Tasklet secondTask() {
+//	   
+//	   
+//		 return  new Tasklet() {
+//	
+//	@Override
+//	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws Exception {
+//
+//
+//		
+//		 System.out.println("This is the second tasklet step");
+//		return RepeatStatus.FINISHED; 
+//	}
+//};
+//}
     
     
     
