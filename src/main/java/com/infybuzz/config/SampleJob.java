@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.infybuzz.listener.FirstJobListener;
+import com.infybuzz.listener.FirstStepListener;
 import com.infybuzz.service.SecondTasklet;
 
 
@@ -32,6 +33,9 @@ public class SampleJob {
 	@Autowired
 	FirstJobListener firstJobListener;
 	
+	@Autowired
+	FirstStepListener firstStepListener;
+	
     @Bean
 	public Job firstJob() {
     	
@@ -48,6 +52,7 @@ public class SampleJob {
 	   
 	   return stepBuilderFactory.get("First Step")
 			   .tasklet(firstTask())
+			   .listener(firstStepListener)
 			   .build();
 	   
 	 
@@ -65,6 +70,7 @@ public class SampleJob {
 
 			
 			 System.out.println("This is the first tasklet step");
+			 System.out.println(chunkContext.getStepContext().getStepExecutionContext());
 			return RepeatStatus.FINISHED; 
 		}
 	};
